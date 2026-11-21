@@ -1,0 +1,62 @@
+{
+  "name": "mcp-server-toolkit",
+  "version": "0.1.0",
+  "description": "A secure MCP server that gives AI agents data tools: read-only SQLite, CSV profiling, JMESPath JSON queries, SSRF-safe web fetch and text diffs, sandboxed to one directory.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsx src/index.ts --root examples/data",
+    "test": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "examples": "tsx scripts/make-examples.ts",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js --root examples/data",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "ai-agents",
+    "llm",
+    "tools",
+    "sqlite",
+    "csv"
+  ],
+  "author": "Jo\u00e3o Pedro Franco",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "csv-parse": "^7.0.3",
+    "diff": "^9.0.0",
+    "jmespath": "^0.16.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.8",
+    "@types/diff": "^7.0.2",
+    "@types/jmespath": "^0.15.2",
+    "@types/node": "^26.6.6",
+    "@vitest/coverage-v8": "^5.1.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.1"
+  },
+  "bin": {
+    "mcp-server-toolkit": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaofrancowork/mcp-server-toolkit.git"
+  }
+}
