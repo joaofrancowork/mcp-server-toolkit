@@ -54,7 +54,9 @@ npm run inspect          # MCP Inspector against the example data
 ```
 
 Docker (stdio): `docker run -i --rm -v "$PWD/data:/data:ro" mcp-server-toolkit`.
-Options: `--root <dir>` (or `MCP_TOOLKIT_ROOT`), `--no-fetch` to disable the only network tool.
+Options: `--root <dir>` (or `MCP_TOOLKIT_ROOT`), `--no-fetch` to disable the only network tool,
+`--audit-log <file>` to append one JSON line per tool call (tool, arguments truncated to 200
+characters, duration, error flag).
 
 ## Architecture
 
@@ -93,7 +95,7 @@ from an attacker. The tools assume that and limit the blast radius.
 ## Testing
 
 ```bash
-npm test         # 36 tests through a real MCP client over an in-memory transport, coverage gate
+npm test         # 38 tests through a real MCP client over an in-memory transport, coverage gate
 npm run smoke    # builds, spawns the server over stdio and calls a tool, as a host would
 ```
 

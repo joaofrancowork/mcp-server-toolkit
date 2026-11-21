@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
+import { AuditLog, auditTools } from "./audit.js";
 import { Sandbox } from "./sandbox.js";
 import { registerCsvTools } from "./tools/csv.js";
 import { type Fetcher, type Resolver, registerFetchTool } from "./tools/fetch.js";
@@ -16,6 +17,8 @@ export interface ServerOptions {
   enableFetch?: boolean;
   resolve?: Resolver;
   fetcher?: Fetcher;
+  /** Append one JSON line per tool call to this file. */
+  auditLogPath?: string;
 }
 
 export function listFiles(root: string, dir = root, depth = 0): string[] {
@@ -40,6 +43,7 @@ export function createServer(options: ServerOptions): McpServer {
     },
   );
 
+  if (options.auditLogPath) auditTools(server, new AuditLog(options.auditLogPath));
   registerSqliteTools(server, sandbox);
   registerCsvTools(server, sandbox);
   registerTextTools(server);
