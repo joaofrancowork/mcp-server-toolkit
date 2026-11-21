@@ -13,7 +13,8 @@
     "examples": "tsx scripts/make-examples.ts",
     "inspect": "npx @modelcontextprotocol/inspector node dist/index.js --root examples/data",
     "prepublishOnly": "npm run build",
-    "smoke": "npm run build && tsx scripts/smoke.ts"
+    "smoke": "npm run build && tsx scripts/smoke.ts",
+    "prepare": "tsc -p tsconfig.build.json"
   },
   "keywords": [
     "mcp",
